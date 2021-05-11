@@ -1,0 +1,47 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #002a54;
+}
+
+header{
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+/*for notepad name heading*/
+h1{
+    padding-top: 15px;
+    font-family: 'Lobster', 'cursive';
+    color: #fff;
+}
+
+/*footer*/
+footer p{
+    font-family: 'Lobster', 'cursive';
+    color: #966702;
+}
+
+
+/*change color for the words Kaku Notepad*/
+.highlight {
+    color: #966702;
+}
+
+/*media queries*/
+@media(max-width:867px){
+    #first,
+    #second,
+    #third
+     {
+        text-align:center;
+        width:100%;
+        padding-left: 30px;
+        padding-right: 0;
+    }
+
+    h1{
+        text-align: center;
+    }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- bootstrap, CSS, font awesome, google font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <title>Kaku Notepad</title>
+
+    </head>
+
+    <body onload="enableEditMode()"> <!--connect with javascript file-->
+        <header><!--title at the top of the html body-->
+            <nav class="navbar">
+                <h1><span class="highlight">Kaku Notepad</span> - Write it down, will you?</h1>
+            </nav>
+        </header>
+
+        <br>
+
+    <!--content container-->
+    <div class="container" style="justify-content: center;">
+        <!--row for buttons-->
+        <div class="row" id="first">
+        <div class="col" >
+        <button onclick="Edit('bold')" class="btn btn-outline-warning" title="bold"><i class="fa fa-bold"></i></button>
+        <button onclick="Edit('italic')" class="btn btn-outline-warning" title="italic"><i class="fa fa-italic"></i></button>
+        <button onclick="Edit('underline')" class="btn btn-outline-warning" title="underline"><i class="fa fa-underline"></i></button>
+        <button onclick="Edit('strikethrough')" class="btn btn-outline-warning" title="strikethrough"><i class="fa fa-strikethrough"></i></button>
+        <button onclick="Edit('createLink',prompt('Enter a URL,http://'))" class="btn btn-outline-warning" title="link"><i class="fa fa-link"></i></button>
+        <button onclick="Edit('unlink')" class="btn btn-outline-warning" title="unlink"><i class="fa fa-unlink"></i></button>
+        <button onclick="Edit('insertUnorderedList')" class="btn btn-outline-warning" title="bullet list"><i class="fa fa-list-ul"></i></button>
+        <button onclick="Edit('insertOrderedList')" class="btn btn-outline-warning" title="number list"><i class="fa fa-list-ol"></i></button>
+        <button onclick="Edit('indent')" class="btn btn-outline-warning" title="indent"><i class="fa fa-indent"></i></button>
+        <button onclick="Edit('outdent')" class="btn btn-outline-warning" title="outdent"><i class="fa fa-outdent"></i></button>
+        <button onclick="Edit('subscript')" class="btn btn-outline-warning" title="subscript"><i class="fa fa-subscript"></i></button>
+        <button onclick="Edit('superscript')" class="btn btn-outline-warning" title="superscript"><i class="fa fa-superscript"></i></button>
+        <button onclick="Edit('cut')" class="btn btn-outline-warning" title="cut"><i class="fa fa-cut"></i></button>
+        <button onclick="Edit('copy')" class="btn btn-outline-warning" title="copy"><i class="fa fa-copy"></i></button>
+        <button onclick="Edit('delete')" class="btn btn-outline-warning" title="delete"><i class="fa fa-trash"></i></button>
+        <button onclick="Edit('insertHorizontalRule')" class="btn btn-outline-warning" title="horizontal rule">HR</button>
+        <button onclick="Edit('justifyLeft')" class="btn btn-outline-warning" title="justify left"><i class="fa fa-align-left"></i></button>
+        <button onclick="Edit('justifyCenter')" class="btn btn-outline-warning" title="justify center"><i class="fa fa-align-center"></i></button>
+        <button onclick="Edit('justifyRight')" class="btn btn-outline-warning" title="justify right"><i class="fa fa-align-right"></i></button>
+        <button onclick="Edit('undo')" class="btn btn-outline-warning" title="undo"><i class="fa fa-undo"></i></button>
+        <button onclick="Edit('redo')" class="btn btn-outline-warning" title="redo"><i class="fa fa-redo"></i></button>
+        <button onclick="Edit('insertParagraph')" class="btn btn-outline-warning" title="insert paragraph"><i class="fa fa-paragraph"></i></button>
+        <button onclick="execCommandWithArg('insertImage',prompt('Enter the image URL', ''));" class="btn btn-outline-warning" title="insert image">
+            <i class="fas fa-image"></i></button>
+        <button onclick="Edit('selectAll')" class="btn btn-outline-warning" style="width: 60px;" title="select all">All</button>
+        </div>
+        </div>
+    <!--end of button row-->
+
+      <br>
+
+    <!--row for font-->
+    <div class="row" id="second">
+    <div class="col-sm-3">
+    <!--heading-->
+    <select onchange="execVal('formatBlock',this.value)" style="width:270px;" class="form-control" title="heading">
+        <option value="H1">Heading 1</option>
+        <option value="H2">Heading 2</option>
+        <option value="H3">Heading 3</option>
+        <option value="H4">Heading 4</option>
+        <option value="H5">Heading 5</option>
+    </select>
+    </div>
+    <div class="col-sm-3">
+    <!--font name-->
+    <select onchange="execVal('fontName',this.value)" style="width:270px;" class="form-control" title="font family">
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="Tahoma">Tahoma</option>
+        <option value="Courier">Courier</option>
+        <option value="cursive">Cursive</option>
+    </select>
+    </div>
+    <div class="col-sm-1">
+    <!--font size-->
+    <select onchange="execVal('fontSize',this.value)" style="width:80px;" class="form-control" title="font size">
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+    </select>
+    </div>
+    <div class="col-sm-1">
+    <!--font color-->
+        <input type="color" onchange="execVal('foreColor',this.value)" style="width:80px;" class="form-control" title="font color">
+    </div>
+    <div class="col-sm-1">
+    <!--font highlight color-->
+        <input type="color" onchange="execVal('hiliteColor',this.value)" style="width:80px;"class="form-control" title="highlight text color">
+    </div>
+    </div>
+    <!--end of row font-->
+
+    <br>
+
+    <!--row for text field-->
+    <div class="row" id="third">
+    <div class="col-sm">
+    <!--Text Field-->
+    <iframe class="embed-responsive-item" class="text-center" name="richTextField" style="width: 100%; height:330px; border:3px solid #966702; background-color: #fff;"></iframe>
+    </div>
+    </div>
+    <!--end of text field row-->
+    </div>
+    <!--end of content container-->
+
+    <br>
+     
+    <!--footer-->
+    <footer class="text-center"><p> Copyright &copy; Mij Mizah 2021</p></footer>   
+
+    <!--javascript, jquery-->
+    <script src="./js/notepad.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    </body>
+</html>
